@@ -1,0 +1,74 @@
+// Programmer: Mirna Farahat
+// Programming: Class Inheritance & Polymorphism
+// Date: 5/23/2022
+
+
+#include <iostream>
+using namespace std;
+
+// Defining rectangle Class
+class Rectangle
+{
+protected:double length, width;
+public:
+  // constructor
+    Rectangle (double, double);
+  // method to compute area
+  double area ();
+};
+//constructor to initialize the values
+Rectangle::Rectangle (double len, double wid)
+{
+  length = len;
+  width = wid;
+}
+
+// method to compute and return area
+double
+Rectangle::area ()
+{
+  return (length * width);
+}
+
+// class definition inherits class Rectangle
+class Box:public Rectangle
+{
+protected:double depth;
+public:
+    Box (double, double, double);
+  double area ();
+  double volume ();
+};
+Box::Box (double len, double wid, double dep):
+Rectangle (len, wid)
+{
+  depth = dep;
+}
+
+double
+Box::area ()
+{
+  double side1, side2, side3, surfaceArea;
+  side1 = depth * (Rectangle::length);
+  side2 = depth * (Rectangle::width);
+  side3 = Rectangle::length * Rectangle::width;
+  surfaceArea = (2 * (side1 + side2 + side3));
+  return surfaceArea;
+}
+
+double
+Box::volume ()
+{
+  return (depth * Rectangle::area ());
+}
+
+int
+main ()
+{
+  Rectangle rectangle (2, 3);
+  Box box (2, 3, 4);
+  cout << "The area of rectangle is " << rectangle.area () << endl;
+  cout << "The surface area of box is " << box.area () << endl;
+  cout << "The volume of box is " << box.volume ();
+  return 0;
+}
